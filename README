@@ -1,19 +1,12 @@
-Definitions:
-Payment: a transaction decreasing the value of an account
-Income: a transaction increasing the value of an account
+# Monthly Budget Dashboard
+
+A monthly budget dashboard that displays spending report based on csv data. 
+
+## Usage
+
+Run `python dashboard.py` to open the app, upload csv data, and view you report.
+
+    
 
 
-Setup.csv logic (indexing starts at 1):
-File name: name of the file being proccessed (should end with .csv)
-Debit: the column of transaction amount if the income transactions are positive numbers and payments are negative
-Credit: the column of transaction amount if payments are tracked as positive (even though reducing wealth) 
-Date: the date of the transaction
-Description: the description of the transaction
-Type: the catagory or type of transaction
-Check transaction type: a boolean; if true/1 the script references the type field to see the transaction type (payment / income)
-Header: a boolean; if false we need to add a header
 
-Example:
-
-reports.csv, 1, , 2, 3, , ,
-report1.csv, , 3, 1, 2, 4, TRUE,

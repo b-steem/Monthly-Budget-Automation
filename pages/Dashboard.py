@@ -1,6 +1,19 @@
 import streamlit as st
+import pandas as pd
+import plotly.express as px
 
 st.title("Dashboard")
 
-# accessing sessoin state in other pages
+# Amount of money spent monthly from transactional data
+# TODO: Pickup from here - https://blog.streamlit.io/crafting-a-dashboard-app-in-python-using-streamlit/
+try:
+    df = pd.read_csv('data/transactions.csv')
+
+except:
+    st.text("Please upload some data to get started!!!")
+
+
+
+
+# accessing session state in other pages
 st.write("You have entered", st.session_state["my_input"])

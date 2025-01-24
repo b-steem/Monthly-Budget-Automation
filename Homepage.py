@@ -18,13 +18,11 @@ st.text("To get started you have two options.")
 
 st.subheader("Option 1")
 st.text("To see how the dashboard works, go to Dashboard.")
-st.text("You can add files using the uplaod csv button.")
+st.text("You can add files using the upload csv button.")
 
 st.page_link('pages/Upload.py')
 
 st.button("Upload CSV")
-
-st.page_link("pages/Upload.py")
 
 st.subheader("Option 2")
 st.text("Clone my github repo and run the server on your local machine.")

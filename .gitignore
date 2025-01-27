@@ -172,3 +172,4 @@ new_transactions/
 # Test file 
 test.py
 test.txt
+test*

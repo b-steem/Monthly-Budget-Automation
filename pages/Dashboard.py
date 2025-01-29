@@ -20,7 +20,7 @@ basic_chart = alt.Chart(df).mark_bar().encode(
             title='Total Amount Spent',
             axis=alt.Axis(grid=True)),
     tooltip=[
-        alt.Tooltip('month(date):O', title='Month'),
+        alt.Tooltip('month(Date):O', title='Month'),
         alt.Tooltip('sum(Amount):Q', title='Total Amount Spent', format='.1f')
     ]
 ).properties(

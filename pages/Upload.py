@@ -8,4 +8,7 @@ if uploaded_file is not None:
     # Read the file as csv
     df = pd.read_csv(uploaded_file)
     st.dataframe(df, width=1800, height=1200)
+
+    # append the new data to transactions
+    df.to_csv("./data/transactions.csv", mode="a", index=False, header=False)
     

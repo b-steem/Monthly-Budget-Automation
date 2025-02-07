@@ -7,7 +7,8 @@ st.title("Dashboard")
 
 # Amount of money spent monthly from transactional data
 # TODO: Pickup from here - https://blog.streamlit.io/crafting-a-dashboard-app-in-python-using-streamlit/
-try:
+# try:
+if True:
     df = pd.read_csv('data/transactions.csv')
 
     # Line Chart
@@ -51,9 +52,17 @@ try:
     )
     avg_monthly_spend
 
+    # Average daily bar chart (broken down by avg amount spend per day of the month)
+    avg_daily_per_month_df = df
+    avg_daily_per_month_df["Day of Month"] = pd.to_datetime(df["Date"]).dt.day
+    avg_daily_per_month_df = avg_daily_per_month_df.groupby("Day of Month").agg(
+        Mean_Spend = ("Amount", "mean")
+    )
+    st.bar_chart(avg_daily_per_month_df, y_label="Average Daily Spend Per Month", x_label="Day of the Month")
 
-except:
-    st.text("Please upload some data to get started!!!")
+
+# except:
+#     st.text("Please upload some data to get started!!!")
 
 
 

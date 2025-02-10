@@ -60,6 +60,14 @@ if True:
     )
     st.bar_chart(avg_daily_per_month_df, y_label="Average Daily Spend Per Month", x_label="Day of the Month")
 
+    # Average weekly bar chart (broken down by avg amount spend per day of the week)
+    avg_daily_per_week_df = df
+    avg_daily_per_week_df["Day of Week"] = pd.to_datetime(df["Date"]).dt.day_of_week
+    avg_daily_per_week_df = avg_daily_per_week_df.groupby("Day of Week").agg(
+        Mean_Spend = ("Amount", "mean")
+    )
+    st.bar_chart(avg_daily_per_week_df, y_label="Average Daily Spend by Week", x_label="Day of the Week")
+
 
 # except:
 #     st.text("Please upload some data to get started!!!")

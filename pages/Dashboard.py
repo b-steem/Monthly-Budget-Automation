@@ -14,7 +14,8 @@ if True:
     # Line Chart
     by_date = df.groupby("Date").sum()
     st.line_chart(by_date, y="Amount")
-
+    
+    st.table(df)
     # Bar Chart 
     df["Month"] = pd.to_datetime(df["Date"]).dt.month
     

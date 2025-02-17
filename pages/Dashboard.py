@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import altair as alt
+from statsmodels.tsa.seasonal import seasonal_decompose 
 
 st.title("Dashboard")
 
@@ -11,11 +12,13 @@ st.title("Dashboard")
 if True:
     df = pd.read_csv('data/transactions.csv')
 
+    # Remove the time from date
+    df["Date"] = df["Date"] = pd.to_datetime(df["Date"], format='mixed').dt.date
+
     # Line Chart
     by_date = df.groupby("Date").sum()
     st.line_chart(by_date, y="Amount")
     
-    st.table(df)
     # Bar Chart 
     df["Month"] = pd.to_datetime(df["Date"]).dt.month
     
@@ -68,6 +71,22 @@ if True:
         Mean_Spend = ("Amount", "mean")
     )
     st.bar_chart(avg_daily_per_week_df, y_label="Average Daily Spend by Week", x_label="Day of the Week")
+
+    # forecast future spend per month of the year
+    df["Year"] = pd.to_datetime(df["Date"]).dt.year
+    avg_monthly_spend_per_year = df.groupby(["Year", "Month"]).agg(
+        Avg_Monthly_Spend = ("Amount", "mean"),
+        Year = ("Year", "mean"),
+        Month = ("Month", "mean")
+    )
+
+    # avg_monthly_spend_per_year["Day"] = pd.to_datetime(avg_monthly_spend_per_year[["Year", "Month"]].assign(DAY=1)).dt.date
+    # avg_monthly_spend_per_year.set_index("Day", inplace=True).drop(["Month", "Year"])
+    # pd.DatetimeIndex(avg_monthly_spend_per_year, freq='infer')
+
+    # st.table(avg_monthly_spend_per_year)
+
+    # result = seasonal_decompose(avg_monthly_spend_per_year["Avg_Monthly_Spend"]) #, model='multiplicative')
 
 
 # except:

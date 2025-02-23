@@ -17,13 +17,13 @@ st.subheader("Getting Started")
 st.text("To get started you have two options.")
 
 st.subheader("Option 1")
-st.text("To see how the dashboard works, go to Dashboard.")
+st.text("To see how the dashboard works - using test data - go to Dashboard.")
 st.page_link('pages/Dashboard.py')
 st.text("You can add files using the upload csv button.")
 st.page_link('pages/Upload.py')
 
 st.subheader("Option 2")
-st.text("Clone my github repo and run the server on your local machine.")
+st.text("To use your own transactions, clone my github repo and run the server on your local machine.")
 
 
 # Saving items to session state

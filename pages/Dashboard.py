@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import altair as alt
+import matplotlib.pyplot as plt 
 from statsmodels.tsa.seasonal import seasonal_decompose 
 
 st.title("Dashboard")
@@ -80,14 +81,12 @@ if True:
         Month = ("Month", "mean")
     )
 
-    # avg_monthly_spend_per_year["Day"] = pd.to_datetime(avg_monthly_spend_per_year[["Year", "Month"]].assign(DAY=1)).dt.date
-    # avg_monthly_spend_per_year.set_index("Day", inplace=True).drop(["Month", "Year"])
-    # pd.DatetimeIndex(avg_monthly_spend_per_year, freq='infer')
+    avg_monthly_spend_per_year["Day"] = pd.to_datetime(avg_monthly_spend_per_year[["Year", "Month"]].assign(DAY=1)).dt.date
+    avg_monthly_spend_per_year.set_index("Day", inplace=True)
+    pd.DatetimeIndex(avg_monthly_spend_per_year["Avg_Monthly_Spend"], freq='infer')
 
-    # st.table(avg_monthly_spend_per_year)
-
-    # result = seasonal_decompose(avg_monthly_spend_per_year["Avg_Monthly_Spend"]) #, model='multiplicative')
-
+    result = seasonal_decompose(avg_monthly_spend_per_year["Avg_Monthly_Spend"], period=12) #, model='multiplicative')
+    st.pyplot(result.plot())
 
 # except:
 #     st.text("Please upload some data to get started!!!")

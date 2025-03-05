@@ -4,7 +4,7 @@ import plotly.express as px
 import altair as alt
 import matplotlib.pyplot as plt 
 from statsmodels.tsa.seasonal import seasonal_decompose 
-#from pmdarima import auto_arima
+from pmdarima import auto_arima
 
 st.title("Dashboard")
 
@@ -14,7 +14,7 @@ if True:
     df = pd.read_csv('data/transactions.csv')
 
     # Remove the time from date
-    df["Date"] = df["Date"] = pd.to_datetime(df["Date"], format='mixed').dt.date
+    df["Date"] = df["Date"] = pd.to_datetime(df["Date"]).dt.date #, format='mixed').dt.date
 
     # Line Chart
     by_date = df.groupby("Date").sum()
@@ -90,14 +90,15 @@ if True:
 
     # TODO: Pickup from here - https://blog.streamlit.io/crafting-a-dashboard-app-in-python-using-streamlit/
     # Fit auto_arima to avg_monthly_spend
-    # stepwise_fit = auto_arima(avg_monthly_spend_per_year["Avg_Monthly_Spend"], start_p=1, start_q=1,
-    #                           max_p=3, max_q=3, m=12,
-    #                           start_P=0, seasonal=True,
-    #                           d=None, D=1, trace=True,
-    #                           error_action='ignore',
-    #                           suppress_warnings=True,
-    #                           stepwise=True)
-    #print(stepwise_fit.summary())
+    stepwise_fit = auto_arima(avg_monthly_spend_per_year["Avg_Monthly_Spend"], start_p=1, start_q=1,
+                              max_p=3, max_q=3, m=12,
+                              start_P=0, seasonal=True,
+                              d=None, D=1, trace=True,
+                              error_action='ignore',
+                              suppress_warnings=True,
+                              stepwise=True)
+    # print(stepwise_fit.summary())
+    # st.table(stepwise_fit.summary())
 
 # except:
 #     st.text("Please upload some data to get started!!!")
